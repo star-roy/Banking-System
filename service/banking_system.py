@@ -15,11 +15,7 @@ from typing import Dict, Optional
 
 
 class BankingSystem:
-    """
-    Banking System Manager - handles all account operations
-    Demonstrates POLYMORPHISM - works with Account interface
-    """
-    
+
     def __init__(self):
         """Initialize the banking system"""
         self._accounts: Dict[str, Account] = {}
@@ -39,18 +35,7 @@ class BankingSystem:
     
     def create_customer(self, name: str, email: str, phone_number: str, 
                        address: str) -> Customer:
-        """
-        Create a new customer
-        
-        Args:
-            name: Customer name
-            email: Customer email
-            phone_number: Customer phone
-            address: Customer address
-            
-        Returns:
-            Customer: Created customer object
-        """
+       
         customer_id = self._generate_customer_id()
         customer = Customer(customer_id, name, email, phone_number, address)
         self._customers[customer_id] = customer
@@ -59,17 +44,7 @@ class BankingSystem:
     
     def create_savings_account(self, account_holder_name: str, 
                               initial_balance: float) -> Optional[Account]:
-        """
-        Create a Savings Account
-        Demonstrates POLYMORPHISM - returns Account type
-        
-        Args:
-            account_holder_name: Name of account holder
-            initial_balance: Initial deposit amount
-            
-        Returns:
-            Account: Created savings account or None if error
-        """
+      
         try:
             account_number = self._generate_account_number()
             account = SavingsAccount(account_number, account_holder_name, 
@@ -88,17 +63,7 @@ class BankingSystem:
     
     def create_current_account(self, account_holder_name: str, 
                               initial_balance: float) -> Optional[Account]:
-        """
-        Create a Current Account
-        Demonstrates POLYMORPHISM - returns Account type
         
-        Args:
-            account_holder_name: Name of account holder
-            initial_balance: Initial deposit amount
-            
-        Returns:
-            Account: Created current account or None if error
-        """
         try:
             account_number = self._generate_account_number()
             account = CurrentAccount(account_number, account_holder_name, 
@@ -116,26 +81,10 @@ class BankingSystem:
             return None
     
     def get_account(self, account_number: str) -> Optional[Account]:
-        """
-        Get account by account number
-        
-        Args:
-            account_number: Account number to retrieve
-            
-        Returns:
-            Account: Account object or None if not found
-        """
         return self._accounts.get(account_number)
     
     def deposit(self, account_number: str, amount: float):
-        """
-        Deposit money into an account
-        Demonstrates POLYMORPHISM - calls appropriate deposit method
         
-        Args:
-            account_number: Target account number
-            amount: Amount to deposit
-        """
         account = self._accounts.get(account_number)
         if account is None:
             print("Account not found!")
@@ -147,14 +96,7 @@ class BankingSystem:
             print(f"Error: {e}")
     
     def withdraw(self, account_number: str, amount: float):
-        """
-        Withdraw money from an account
-        Demonstrates POLYMORPHISM - different behavior for Savings vs Current
-        
-        Args:
-            account_number: Source account number
-            amount: Amount to withdraw
-        """
+
         account = self._accounts.get(account_number)
         if account is None:
             print("Account not found!")
@@ -163,12 +105,7 @@ class BankingSystem:
         account.withdraw(amount)  # Polymorphic call
     
     def check_balance(self, account_number: str):
-        """
-        Check account balance
-        
-        Args:
-            account_number: Account number to check
-        """
+       
         account = self._accounts.get(account_number)
         if account is None:
             print("Account not found!")
@@ -181,13 +118,7 @@ class BankingSystem:
         print("====================================\n")
     
     def display_account_info(self, account_number: str):
-        """
-        Display detailed account information
-        Demonstrates POLYMORPHISM - different info for different account types
-        
-        Args:
-            account_number: Account number to display
-        """
+       
         account = self._accounts.get(account_number)
         if account is None:
             print("Account not found!")
@@ -203,12 +134,7 @@ class BankingSystem:
             account.display_current_account_details()
     
     def display_transaction_history(self, account_number: str):
-        """
-        Display transaction history
-        
-        Args:
-            account_number: Account number to display history for
-        """
+       
         account = self._accounts.get(account_number)
         if account is None:
             print("Account not found!")
@@ -217,13 +143,7 @@ class BankingSystem:
         account.display_transaction_history()
     
     def apply_monthly_charges(self, account_number: str):
-        """
-        Apply monthly charges/interest to an account
-        Demonstrates POLYMORPHISM - different behavior for Savings vs Current
         
-        Args:
-            account_number: Account number to apply charges to
-        """
         account = self._accounts.get(account_number)
         if account is None:
             print("Account not found!")
@@ -243,14 +163,7 @@ class BankingSystem:
     
     def transfer_funds(self, from_account_number: str, to_account_number: str, 
                       amount: float):
-        """
-        Transfer money between accounts
         
-        Args:
-            from_account_number: Source account number
-            to_account_number: Destination account number
-            amount: Amount to transfer
-        """
         from_account = self._accounts.get(from_account_number)
         to_account = self._accounts.get(to_account_number)
         
@@ -301,13 +214,5 @@ class BankingSystem:
         return len(self._accounts)
     
     def account_exists(self, account_number: str) -> bool:
-        """
-        Check if account exists
-        
-        Args:
-            account_number: Account number to check
-            
-        Returns:
-            bool: True if account exists, False otherwise
-        """
+       
         return account_number in self._accounts

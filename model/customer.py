@@ -5,29 +5,8 @@ Represents a bank customer with personal information
 
 
 class Customer:
-    """
-    Represents a bank customer
-    
-    Attributes:
-        customer_id (str): Unique customer identifier
-        name (str): Customer name
-        email (str): Customer email
-        phone_number (str): Customer phone number
-        address (str): Customer address
-    """
-    
     def __init__(self, customer_id: str, name: str, email: str, 
                  phone_number: str, address: str):
-        """
-        Initialize a new customer
-        
-        Args:
-            customer_id: Unique customer ID
-            name: Customer name
-            email: Customer email
-            phone_number: Customer phone number
-            address: Customer address
-        """
         self._customer_id = customer_id
         self._name = name
         self._email = email

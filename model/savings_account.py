@@ -7,20 +7,7 @@ from .account import Account
 
 
 class SavingsAccount(Account):
-    """
-    Savings Account with specific rules
-    Demonstrates INHERITANCE - extends Account base class
-    Demonstrates POLYMORPHISM - overrides abstract methods with savings-specific behavior
     
-    Features:
-        - Minimum balance requirement: ₹1,000
-        - Interest rate: 4.5% per annum
-        - 5 free withdrawals per month
-        - Withdrawal limit: ₹50,000 per transaction
-        - Additional charges after free withdrawal limit
-    """
-    
-    # Class constants
     MINIMUM_BALANCE = 1000.0
     INTEREST_RATE = 4.5  # per annum
     WITHDRAWAL_LIMIT = 50000.0
@@ -29,17 +16,6 @@ class SavingsAccount(Account):
     
     def __init__(self, account_number: str, account_holder_name: str, 
                  initial_balance: float):
-        """
-        Initialize a new Savings Account
-        
-        Args:
-            account_number: Unique account identifier
-            account_holder_name: Name of account holder
-            initial_balance: Initial deposit amount
-            
-        Raises:
-            ValueError: If initial balance is below minimum
-        """
         if initial_balance < self.MINIMUM_BALANCE:
             raise ValueError(
                 f"Initial balance must be at least ₹{self.MINIMUM_BALANCE} "
@@ -50,16 +26,6 @@ class SavingsAccount(Account):
         self._withdrawal_count = 0
     
     def withdraw(self, amount: float) -> bool:
-        """
-        Withdraw money from savings account (POLYMORPHISM)
-        Implements account-specific withdrawal rules
-        
-        Args:
-            amount: Amount to withdraw
-            
-        Returns:
-            bool: True if withdrawal successful, False otherwise
-        """
         if amount <= 0:
             print("Withdrawal amount must be positive!")
             return False
@@ -71,14 +37,12 @@ class SavingsAccount(Account):
         current_balance = self.get_balance()
         charge_amount = 0
         
-        # Apply charge if free withdrawals exhausted
         if self._withdrawal_count >= self.FREE_WITHDRAWALS:
             charge_amount = self.WITHDRAWAL_CHARGE
             print(f"Note: Withdrawal charge of ₹{self.WITHDRAWAL_CHARGE} will be applied.")
         
         total_deduction = amount + charge_amount
         
-        # Check minimum balance requirement
         if current_balance - total_deduction < self.MINIMUM_BALANCE:
             print(f"Insufficient balance! Minimum balance of ₹{self.MINIMUM_BALANCE} "
                   f"must be maintained.")
@@ -101,10 +65,7 @@ class SavingsAccount(Account):
         return True
     
     def apply_monthly_charges(self):
-        """
-        Apply monthly interest (POLYMORPHISM)
-        Credits interest and resets withdrawal count
-        """
+        
         current_balance = self.get_balance()
         monthly_interest = (current_balance * self.INTEREST_RATE) / (12 * 100)
         
@@ -117,20 +78,12 @@ class SavingsAccount(Account):
         
         print(f"Monthly interest of ₹{monthly_interest:.2f} credited to account!")
         
-        # Reset withdrawal count for new month
         self._withdrawal_count = 0
     
     def get_account_type(self) -> str:
-        """
-        Get account type (POLYMORPHISM)
-        
-        Returns:
-            str: "Savings Account"
-        """
         return "Savings Account"
     
     def display_savings_account_details(self):
-        """Display detailed savings account information"""
         self.display_account_info()
         print(f"Interest Rate: {self.INTEREST_RATE}% per annum")
         print(f"Minimum Balance: ₹{self.MINIMUM_BALANCE}")

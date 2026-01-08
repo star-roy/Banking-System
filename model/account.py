@@ -10,29 +10,10 @@ from .transaction import Transaction
 
 
 class Account(ABC):
-    """
-    Abstract base class for all account types
-    Demonstrates ABSTRACTION - defines contract that all accounts must follow
-    Demonstrates ENCAPSULATION - private fields with controlled access
-    
-    Attributes:
-        _account_number (str): Unique account number
-        _account_holder_name (str): Name of account holder
-        _balance (float): Current account balance
-        _created_date (datetime): When account was created
-        _transaction_history (List[Transaction]): List of all transactions
-    """
     
     def __init__(self, account_number: str, account_holder_name: str, 
                  initial_balance: float):
-        """
-        Initialize a new account
         
-        Args:
-            account_number: Unique account identifier
-            account_holder_name: Name of account holder
-            initial_balance: Initial deposit amount
-        """
         self._account_number = account_number
         self._account_holder_name = account_holder_name
         self._balance = initial_balance
@@ -72,15 +53,7 @@ class Account(ABC):
         self._balance = balance
     
     def deposit(self, amount: float):
-        """
-        Deposit money into account
         
-        Args:
-            amount: Amount to deposit
-            
-        Raises:
-            ValueError: If amount is not positive
-        """
         if amount <= 0:
             raise ValueError("Deposit amount must be positive")
         
@@ -92,35 +65,14 @@ class Account(ABC):
     
     @abstractmethod
     def withdraw(self, amount: float) -> bool:
-        """
-        Withdraw money from account (ABSTRACT METHOD)
-        Must be implemented by subclasses with specific rules
-        
-        Args:
-            amount: Amount to withdraw
-            
-        Returns:
-            bool: True if withdrawal successful, False otherwise
-        """
         pass
     
     @abstractmethod
     def apply_monthly_charges(self):
-        """
-        Apply monthly charges/interest (ABSTRACT METHOD)
-        Must be implemented by subclasses with specific rules
-        """
         pass
     
     @abstractmethod
     def get_account_type(self) -> str:
-        """
-        Get account type (ABSTRACT METHOD)
-        Must be implemented by subclasses
-        
-        Returns:
-            str: Account type name
-        """
         pass
     
     def display_account_info(self):
@@ -149,14 +101,6 @@ class Account(ABC):
     
     def _add_transaction(self, transaction_type: str, amount: float, 
                         description: str):
-        """
-        Add transaction to history (protected method for subclasses)
-        
-        Args:
-            transaction_type: Type of transaction
-            amount: Transaction amount
-            description: Transaction description
-        """
         self._transaction_history.append(
             Transaction(transaction_type, amount, description)
         )

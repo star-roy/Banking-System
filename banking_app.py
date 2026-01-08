@@ -37,15 +37,7 @@ class BankingApp:
         print("╚═══════════════════════════════════════════════════════╝")
     
     def get_int_input(self, prompt: str) -> int:
-        """
-        Get integer input from user with error handling
         
-        Args:
-            prompt: Input prompt message
-            
-        Returns:
-            int: User input as integer
-        """
         while True:
             try:
                 return int(input(prompt))
@@ -53,15 +45,7 @@ class BankingApp:
                 print("Invalid input! Please enter a number.")
     
     def get_float_input(self, prompt: str) -> float:
-        """
-        Get float input from user with error handling
-        
-        Args:
-            prompt: Input prompt message
-            
-        Returns:
-            float: User input as float
-        """
+       
         while True:
             try:
                 return float(input(prompt))
