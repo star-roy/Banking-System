@@ -99,7 +99,7 @@ Banking System Python/
 
 1. **Navigate to the project directory**
    ```bash
-   cd "d:\VISUALSTD\Banking System Python"
+   cd "path"
    ```
 
 2. **Run the application**
